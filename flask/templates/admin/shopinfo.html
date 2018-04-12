@@ -1,0 +1,129 @@
+<!-- 管理员登录界面,点击查看商家信息后跳转的页面 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<!-- <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+	<link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="/static/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+    <script src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+	<!-- <style type="text/css">
+		
+		#table_body{
+			height: 80%;
+			margin: 5%;
+		}
+		#ul_td_left{
+			height: 100%;
+			width: 20%;
+			vertical-align: top;
+			border: 1px solid #000000;
+		}
+		.liebiao{
+			margin-top: 10%;
+			text-align: center;
+			width: 100%;
+			height: 20%;
+		}
+		#right_div{
+			height:100%;
+			border: 1px solid #000000;
+		}
+	</style> -->
+
+	<script>
+		//发起审核通过请求
+   function agree(){
+   		if(confirm('确认通过?')){
+   			location.href='agreeshopapply?shopid={{rs._id}}&uid={{rs.uid}}';
+   		}
+   }
+       //发起驳回
+   function refuse(){
+   			$('#myModal').modal('show');
+   		}
+      //驳回理由
+   	function subRefuse(){
+   		refuseForm.submit();
+   	}
+   
+   </script>
+</head>
+<body>
+	<div class="container">
+	{% include "admin/adminhead.html" %}
+		<div id="table_body" class='row'>
+			<div id="ul_td_left" class="col-md-3 col-sm-3 col-xs-3">
+				{% include "admin/adminleft.html" %}
+			</div>
+			<div class="col-md-1 col-sm-1 col-xs-1">
+			</div>
+			<div id='right_div' class="col-md-8 col-sm-8 col-xs-8">
+					<table width="100%" class="table-bordered">
+					  <tr>
+					  	<td>餐厅名称:</td>
+					  	<td>{{rs.shopname}}</td>   <!-- 将查询到的数据,在这里前端显示 -->
+					  	<td>联系电话:</td>
+					  	<td>{{rs.tel}}</td>
+					  	<td><a href="applyList">返回</a></td>
+					  </tr>
+					  <tr>
+					  	<td>地址:</td>
+					  	<td colspan="4">{{rs.address}}</td>
+					  </tr>
+					  <tr>
+					  	<td>身份证:</td>
+					  	<td colspan="4"><img src="{{rs.idcard}}"/></td>
+					  </tr>
+					  <tr>
+					  	<tr>
+					  	<td>手持身份证:</td>
+					  	<td colspan="4"><img src="{{rs.ownercard}}"/></td>
+					  </tr>
+					  <tr>
+					  	<td>营业执照:</td>
+					  	<td colspan="4"><img src="{{rs.blicense}}"/></td>
+					  </tr>
+					  <tr>
+					  	<td>卫生许可证:</td>
+					  	<td colspan="4"><img src="{{rs.hlicense}}"/></td>
+					  </tr>
+					  <tr>
+						<td><input type="button" class="btn btn-primary" value="同意" onclick='agree()'/></td>
+						<td colspan="4" align="right"><input type="button" class="btn btn-primary" value="驳回" onclick='refuse()'/></td>
+					  </tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+<!-- 驳回模态框 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content" style="text-align: center;">
+	            <div class="modal-header" >
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title" id="myModalLabel">驳回理由</h4>
+	            </div>
+	            <!-- 弹出框中驳回理由,调用form中的方法 -->
+	            <form name='refuseForm' method="post" action='/refuseShopApply'>   <!-- 提交到refuseShopApply路由 -->
+	            	<textarea style="width: 81%" rows="6" name='msg'></textarea>
+	            	<input type="hidden" name="shopid" value='{{rs._id}}'>
+	            	<!-- 请求获取页面的id,hidden将获取到的隐藏 -->
+	            	<input type="hidden" name="uid" value='{{rs.uid}}'>
+	        	</form>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	                <button type="button" class="btn btn-primary" onclick='subRefuse()'>驳回</button><!-- 弹出框中点击调用subResfuse驳回方法 -->
+	            </div>
+	        </div><!-- /.modal-content --> 
+	    </div><!-- /.modal -->
+	</div>
+</body>
+</html>

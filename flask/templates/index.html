@@ -1,0 +1,57 @@
+<!-- 网站用户,登录注册界面 -->
+
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  
+  
+    <script>
+        function dianLogin(){
+            $('#myModal').modal('show');
+        }
+
+        function adminLogin(){
+            $('#admin').modal('show');
+        }
+    </script>
+
+ </head>
+ <body>
+    <div class="container">
+        {% include "head.html" %}    <!-- 这里是继承别的界面 -->
+
+        <!-- 用户注册/登陆模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style='width:720px;'>
+                    <div class="modal-header">
+                    登陆/注册
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        {% include "login.html" %}
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+         <!-- 管理员登录模态框 -->
+        <div class="modal fade" id="admin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style='width:600px;'>
+                    <div class="modal-header">
+                    登陆
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        {% include "adminLogin.html" %}
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+    </div>
+
+ </body>
+</html>

@@ -1,0 +1,42 @@
+<!-- 网站页面头部 -->
+
+<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+<script src="/static/bootstrap/js/jquery.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+<style>
+	/*body{
+		margin:0;
+	}*/
+	.headclass{
+		padding:6px;
+	}
+  </style>
+
+  <div class="container">
+    <div class="row">
+        <div class="col-md-3 headclass">
+        <img src="../static/images/logo2.png" alt="" width=":50px" height="70px" /></a>
+        </div>
+        <div class="col-md-6 headclass" style="background-color:#00ff99; text-align:center">
+            YQ团
+        </div>
+        <div class="col-md-3">
+        <table width="100%">
+            <tr align='center'>
+                <td>
+                	{% if loginbean is undefined or loginbean==None %}
+                    <!-- <input type='button' value='登录/注册' class="btn btn-info" onclick='dianLogin()'/> -->
+                    <a href="javascript:void" onclick='dianLogin()'>登陆/注册</a>
+                    <a href="javascript:void" onclick='adminLogin()'>管理员登录</a>
+                    {% else %}
+                    <a href='/'>首页</a>&nbsp;&nbsp;
+                    <a href='/home'>个人主页</a>&nbsp;&nbsp;
+                    <a href='/logout'>注销</a>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+        </div>
+    </div>
+</div>

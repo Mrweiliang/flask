@@ -1,0 +1,62 @@
+<!-- 登录成功后,点击分类管理出现的界面 -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<!-- <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+	<link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<!-- <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script> -->
+    <script src="/static/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+    <script src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+	<style type="text/css">
+		body{
+			height: 600px;
+		}
+		#table_body{
+			height: 80%;
+			margin-top:3px;
+		}
+		#ul_td_left{
+			height: 100%;
+			width: 20%;
+			/*vertical-align: top;*/
+			/*border: 1px solid #000000;*/
+		}
+		.liebiao{
+			margin-top: 10%;
+			text-align: center;
+			width: 100%;
+			height: 20%;
+		}
+		#right_div{
+			height:100%;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+	{% include "head.html" %}
+		<div id="table_body" class='row'>
+			<div id="ul_td_left" class="col-md-3 col-sm-3 col-xs-3">
+				{% include "home/homeleft.html"%}
+			</div>
+			<div id='right_div' class="col-md-8 col-sm-8 col-xs-8">
+				<!-- 右边div -->
+				{% include "dish/sortright.html"%}
+
+			
+			</div>
+		</div>
+</div>
+
+</body>
+</html>
+

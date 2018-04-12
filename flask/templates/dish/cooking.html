@@ -1,0 +1,103 @@
+<!-- 点击分类管理界面的右边界面 -->
+
+<script>
+        function showadddish(){
+            $('#myModal').modal('show');
+        }
+
+ 		
+
+ </script>
+
+
+
+<div style="text-align: center">
+	<input type="text" name="dishname"><input type="submit" value="搜索"/>
+</div>
+
+<button type="button" class="btn btn-success" onclick="showadddish()">创建菜品</button>
+
+<!-- 显示菜单列表 -->
+<div class="row">
+	<div class="col-md-2">
+		<ul class="nav nav-pills nav-stacked" style="max-width: 140px;float:left;margin-top:12px;">
+		{% for item in sortlist%}
+
+			<li class="active">
+				<a href="/menu?sortid={{item._id}}">   <!-- 将商家的菜单显示 -->
+					{{item.sortname}}
+				</a>
+			</li>
+			<li><a></a></li>
+		{% endfor %}
+		</ul>
+	</div>
+
+
+<!-- 菜单下的菜显示 -->
+	<div class='col-md-10'>	
+		<table class="table table-bordered" width="100%">
+			{% for item in dishRs%}
+			<tr>
+				<td>
+					<img src='{{item.dishphoto}}' width="90" height="90">
+				</td>
+				<td>
+					{{item.dishname}}<br/>
+					{{item.price}}元
+				</td>
+				<td>
+					<a href="javascript:void">修改</a>&nbsp;
+					<a href="javascript:void">删除</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+</div>
+
+
+
+
+<!-- 创建菜模态框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style='width:720px;'>
+            <div class="modal-header">
+            创建菜品
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            
+
+		            <div class="modal-body" style='text-align: center'>
+		                
+		                <form method="post" action='upload' enctype="multipart/form-data">
+
+		                	<div class="form-group">
+							    <label for="name">菜品名称</label>
+							    <input type="text" name='dishname' class="form-control"/>
+						   </div>
+						   <div class="form-group">
+							    <label for="name">价格</label>
+							    <input type="text" name='price' class="form-control"/>
+						   </div>
+
+		                    <div class="form-group">
+							    <label for="name">照片上传</label>
+							    <input type="file" name="dishphoto">
+							 </div>
+
+		                    <select class="form-control" name="sortid">
+		                    	{% for item in sortlist %}
+		                    	<option value="{{item._id}}">{{item.sortname}}</option>
+		                    	{% endfor %}
+		                    </select>
+		                    <input type='hidden' name='shopid' value='{{sortlist[0].shopid}}'/>   <!-- 请求获取页面shopid,并显示在页面上 -->
+		                    <button type="submit" class="btn btn-success">创建</button>
+		                </form>
+		            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+

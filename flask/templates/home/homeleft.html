@@ -1,0 +1,48 @@
+<!-- 登录成功后左侧列表界面 -->
+
+<style>
+.list li{
+	list-style:none;
+	position:relative;
+	left:-10px;
+}
+</style>
+
+<ul class="nav nav-pills nav-stacked left_ul">
+	<li class="active"><a href="#">列表选项</a></li>
+	<li><a href="#">我的消息</a></li>
+	<li>
+		{% if loginbean.role==1 %} <!-- 如果 -->
+		<a href="/shopapply">商家申请</a>
+		{% elif loginbean.role==2 %} <!-- 或者 -->
+		    商家审核中
+		{% elif loginbean.role==3 %} 
+		<a href="javascript:void">店家管理</a>
+		    <ul class="list">
+		    	<li><a href="/sortmanager">分类管理</a></li>   <!-- 点击分类管理跳转路由 -->
+		    	<li><a href="/menu">菜品管理</a></li>
+		    </ul>
+		{% endif %}   <!-- 结束 -->
+	</li>
+	<li>
+		{% if loginbean.role==1 %}
+		<a href="#">我的点单</a>
+		{% elif loginbean.role==2 %}
+		<a href="#">我的点单</a>
+		{% elif loginbean.role==3 %}
+		<a href="#">用户订单</a>
+		{% endif %}
+	</li>
+	<li>
+		{% if loginbean.role==1 %}
+		<a href="#">我的足迹</a>
+		{% elif loginbean.role==2 %}
+		<a href="#">我的足迹</a>
+		{% elif loginbean.role==3 %}
+		<a href="#">商家后台</a>
+		{% endif %}
+	</li>
+	
+					
+</ul>
+

@@ -1,0 +1,83 @@
+<!-- 点击分类管理界面的右边界面 -->
+
+<script>
+        function addsort(){
+            $('#myModal').modal('show');
+        }
+
+        function updatashow(thisa,sortid){
+        updSortForm.sortid.value = sortid;  //找到sortid
+        updSortForm.sortname.value = thisa.parentElement.parentElement.children[0].innerText;//更改
+        $('#updatadiv').modal('show');
+    }
+ </script>
+
+<button type="button" class="btn btn-success" onclick="addsort()">创建分类</button>商家编号:{{flowid}}  <!-- 点击按钮弹出模态框 -->
+<!-- 获取商家流水id -->
+
+<!-- 将查库获取到的菜单分类在这显示 -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>类名</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in sortlist %}
+        <tr>
+            <td>
+                {{item.sortname}}
+            </td>
+            <td>
+                <a href="javascript:void" onclick="updatashow(this,'{{item._id}}')">修改</a>
+                <!-- <a href="#">删除</a> -->
+                <!-- <a href="/deleteName?dish_id={{item._id}}">删除</a> -->
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<!-- 创建菜单分类模态框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style='width:720px;'>
+            <div class="modal-header">
+            创建分类
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body" style='text-align: center'>
+                
+                <form method="post" action="addsort">
+                    分类名称:<input type="text" name='sortname' class="form-control"/><br/>
+                    <input type="hidden" name="shopid" value="{{shopid}}">   <!-- 请求获取页面shopid,并显示在页面上 -->
+                    <button type="submit" class="btn btn-success">创建</button>
+                </form>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 修改菜单信息模态框 -->
+<div class="modal fade" id="updatadiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                菜品分类
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form name='updSortForm' method="post" action="updataSort">
+                    分类名称:
+                   <input type="text" name="sortname" class="form-control" placeholder="请输入类名"><br/>
+                   <input type="hidden" name="sortid">
+                   <button type="submit" class="btn btn-primary">提交</button>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+

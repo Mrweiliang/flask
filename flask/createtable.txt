@@ -1,0 +1,57 @@
+use figer
+db.admins.insert({'email':'admin','pwd':'admin',role:0})      #管理员表
+
+商家表:
+	_id
+	uid
+	shopname
+	address
+	lng
+	lat
+	idcard
+	ownercard
+	blicense
+	hlicense
+	updtime
+	createtime
+	flag         /*-2表强制终止,-1表驳回,0表审核中,1表审核通过*/
+
+
+信息表:
+	      _id
+发送者:	  sendflag     /*0表管理员,1表普通用户*/
+管理员:	  sendid
+		  sendname
+接受者:	  recflag     /*0表管理员,1表普通用户*/
+普通用户: recid
+		  recname
+		  msg
+		  createtime
+
+
+db.users.ensureIndex({"email":1},{"unique":true,"name":"emailuiq"})
+db.users.ensureIndex({"tel":1},{"unique":true,"name":"teluiq"})
+db.users.ensureIndex({"nicheng":1},{"unique":true,"name":"nichenguiq"})
+
+db.dishsorts.ensureIndex({"sortname":1},{"unique":true,"name":"sortnameuiq"})
+
+
+Foods表:
+_id
+shopid
+uid
+sortid
+dishname
+photo
+price   价格
+curprice  当前价格
+flag    0表上架,1表下架
+
+/*店铺流水id表*/
+shopflow:
+db.shopflow.insert({'flowid':0})
+
+db.shops.update({},{$set:{"flowid":0}},{multi:true})   //给shops中所有记录添加flowid
+
+
+
